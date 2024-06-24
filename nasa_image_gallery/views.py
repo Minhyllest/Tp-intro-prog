@@ -5,24 +5,22 @@ from django.shortcuts import redirect, render
 from .layers.services import services_nasa_image_gallery
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
-
+from .layers.services.services_nasa_image_gallery import getAllImages
 # función que invoca al template del índice de la aplicación.
 def index_page(request):
     return render(request, 'index.html')
 
 # auxiliar: retorna 2 listados -> uno de las imágenes de la API y otro de los favoritos del usuario.
 def getAllImagesAndFavouriteList(request):
-    images = []
+    images = getAllImages()
     favourite_list = []
-
     return images, favourite_list
 
 # función principal de la galería.
 def home(request):
     # llama a la función auxiliar getAllImagesAndFavouriteList() y obtiene 2 listados: uno de las imágenes de la API y otro de favoritos por usuario*.
     # (*) este último, solo si se desarrolló el opcional de favoritos; caso contrario, será un listado vacío [].
-    images = []
-    favourite_list = []
+    images, favourite_list = getAllImagesAndFavouriteList(request)
     return render(request, 'home.html', {'images': images, 'favourite_list': favourite_list} )
 
 
@@ -53,5 +51,6 @@ def deleteFavourite(request):
 
 
 @login_required
-def exit(request):
-    pass
+def logout(request):
+    render(request, 'index.html')
+

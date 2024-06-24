@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'nasa_image_gallery',
-    'bootstrap5',
+    'bootstrap5'
+    
 ]
 
 MIDDLEWARE = [
