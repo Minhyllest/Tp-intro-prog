@@ -6,7 +6,6 @@ from .layers.services import services_nasa_image_gallery
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from .layers.services.services_nasa_image_gallery import getAllImages
-
 # función que invoca al template del índice de la aplicación.
 def index_page(request):
     return render(request, 'index.html')
@@ -43,8 +42,7 @@ def getAllFavouritesByUser(request):
 
 @login_required
 def saveFavourite(request):
-     favourites=saveFavourite(request)
-     return favourites
+    pass
 
 
 @login_required
@@ -52,5 +50,7 @@ def deleteFavourite(request):
     pass
 
 
-
+@login_required
+def logout(request):
+    render(request, 'index.html')
 
